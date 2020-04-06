@@ -1,0 +1,30 @@
+!###############################
+
+
+! -----------------------------------------------------!
+!                     URXVT Settings                   !
+! -----------------------------------------------------!
+
+! Fonts
+URxvt.font: xft:Anonymous Pro:size=12:antialias=true:hinting=true
+URxvt.boldFont: xft:Anonymous Pro B:bold:size=12:antialias=false
+URxvt.italicFont: xft:Anonymous Pro I:italic:size=12:antialias=true:hinting=true
+URxvt.boldItalicFont: xft:Anonymous Pro BI:bold:italic:size=12:antialias=true:hinting=true
+URxvt.letterSpace: 0
+
+! Interface
+URxvt*borderless:       true
+URxvt*internalBorder:   10
+URxvt*scrollBar:        false
+URxvt*saveLines:        500
+URxvt*dynamicColors:    true
+URxvt*termName:         rxvt-unicode
+URxvt*title:            Urxvt
+URxvt*transparent:      false
+URxvt*depth:            30
+
+! Perl Extensions
+URxvt.perl-ext-common: default,matcher,resize-font
+URxvt.url-launcher: /usr/bin/google-chrome-stable
+URxvt.matcher.button: 1
+

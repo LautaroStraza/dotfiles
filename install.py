@@ -12,7 +12,7 @@
 ################################
 
 # Lista de programas
-programas = ['Todos', 'Vim']
+programas = ['Todos', 'Vim', 'Urxvt', 'Xinit', 'bash', 'I3', 'Polybar', 'Rofi']
 
 from subprocess import run
 
@@ -52,7 +52,7 @@ def main():
         # Condición de salida
         if(op == len(programas)):
             break
-        
+
 	#Se instalarán todas las configuraciones
         if(op == 0):
             for p in programas[1:]:
@@ -64,7 +64,7 @@ def main():
             input('Continuar...')
         else:
             try:
-                seleccion = programas[op] 
+                seleccion = programas[op]
             except IndexError as e:
                 print(e)
                 continue

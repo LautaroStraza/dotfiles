@@ -1,0 +1,19 @@
+configuration {
+	width: 70;
+	lines: 5;
+	columns: 1;
+	font: "Anonymous Pro 16";
+	bw: 0;
+	location: 0;
+	padding: 100;
+	yoffset: 0;
+	xoffset: 0;
+	show-icons: true;
+	disable-history: false;
+	eh: 1;
+	fullscreen: false;
+	fake-transparency: true;
+    opacity: 80;
+    theme: "~/.cache/wal/colors-rofi-dark.rasi";
+}
+/* vim:ft=css

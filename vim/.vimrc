@@ -96,7 +96,7 @@ Plugin 'VundleVim/Vundle.vim'
 "-------------------------"
 " Agregar aca los Plugins "
 "-------------------------"
-Plugin 'haishanh/night-owl.vim'
+"Plugin 'haishanh/night-owl.vim'
 Plugin 'mboughaba/i3config.vim'
 Plugin 'ervandew/supertab'
 Plugin 'junegunn/goyo.vim'
@@ -110,6 +110,8 @@ Plugin 'wikitopian/hardmode'
 "Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 "Plugin 'tpope/vim-fugitive'
 "Plugin 'xuhdev/vim-latex-live-preview'
+Plugin 'dylanaraps/wal.vim'
+
 
 
 "---------------------------------"
@@ -144,11 +146,15 @@ let g:airline_theme='dark_minimal'
 "autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 
 " -- > haishanh/night-owl.vim
-if (has("termguicolors"))
- set termguicolors
-endif
-syntax enable
-colorscheme night-owl
+"if (has("termguicolors"))
+ "set termguicolors
+"endif
+"syntax enable
+"colorscheme night-owl
+
+
+" -- > dylanaraps/wal.vim
+colorscheme wal
 
 "plasticboy/vim-markdown
 "let g:vim_markdown_folding_disabled = 1
