@@ -14,7 +14,7 @@
 " Basic setup "
 "-------------"
 
-"Disable beeping.
+" Disable beeping.
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
@@ -22,6 +22,7 @@ syntax on           " Habilitar: syntax highlighting.
 set number          " Habilitar: número de renglon.
 set relativenumber  " Habilitar: números relativos de renglones.
 set hlsearch        " Habilitar: resaltar palabras buscadas.
+set incsearch       " Habilitar: resaltar buscado mientras escribo.
 set tabstop=4      	" Determina: cantidad de espacios de un caracter Tab.
 set softtabstop=4
 set shiftwidth=4  	" Determina: cantidad de espacios de una identación.
@@ -35,7 +36,7 @@ set ruler           " Show the cursor position all the time.
 set laststatus=2    " Always display the status line.
 set hidden          " Configuración para poder ocultar buffers.
 set wildmode=longest,list,full "Habilita el autocompletado de archivos.
-
+set encoding=utf-8
 
 "------------"
 " Re-mapping "
@@ -44,45 +45,51 @@ set wildmode=longest,list,full "Habilita el autocompletado de archivos.
 " Cambio leader key de \ a <espacio>.
 let mapleader =" "
 " Recargar configuracion
-map <leader>r :source ${HOME}/.vimrc<CR>
+nnoremap <leader>r :source ${HOME}/.vimrc<CR>
+" Pone/Quita el resaltado en las busquedas
+nnoremap <leader>h :set hlsearch!<CR>
 
 " Copiar y pegar a xclipboard
-vnoremap <C-y> "*y :let @+=@*<CR>
-vnoremap <C-x> "*d :let @+=@*<CR>
-map <C-p> "+P
+"vnoremap <C-y> "*y :let @+=@*<CR>
+"vnoremap <C-x> "*d :let @+=@*<CR>
+"nnoremap <C-p> "+P
 
 " Selección visual dentro de parentesis o corchetes.
-noremap % v%
+nnoremap % v%
 
 " Deshabilita las flechas dentro de <insert mode>.
-map <Up>        <Nop>
-map <Down>      <Nop>
-map <Left>      <Nop>
-map <Right>     <Nop>
+nnoremap <Up>        <Nop>
+nnoremap <Down>      <Nop>
+nnoremap <Left>      <Nop>
+nnoremap <Right>     <Nop>
 
 " Remapeo para buffers.
-map <leader>n :bnext<CR>
-map <leader>p :bprev<CR>
-map <leader>d :bdelete<CR>
-map <leader>w :w<CR>
-map <leader>q :q<CR>
+nnoremap <leader>n :bnext<CR>
+nnoremap <leader>p :bprev<CR>
+nnoremap <leader>d :bdelete<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
 
 " Remapeo para moverme entre ventanas.
-map <C-k> <C-w>k
-map <C-j> <C-w>j
-map <C-h> <C-w>h
-map <C-l> <C-w>l
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 " Remapeo para plugins.
-map <leader>i :PluginInstall<CR>:bd<CR>
-map <leader>t :NERDTreeToggle<CR>
-map <leader>g :Goyo<CR>
-map <leader>h <Esc>:call ToggleHardMode()<CR>
+nnoremap <leader>i :PluginInstall<CR>:bd<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>g :Goyo<CR>
+"nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 " Remueve espacios en blanco extras
 " al final de cada linea al guardar
 "                     el documento.
 autocmd BufWritePre * %s/\s\+$//e
+
+" Remapeo para hacer ejecutable un script
+nnoremap <F2> :!chmod +x %<CR>
+
 
 "---------------"
 " Vundle Config "
@@ -96,23 +103,38 @@ Plugin 'VundleVim/Vundle.vim'
 "-------------------------"
 " Agregar aca los Plugins "
 "-------------------------"
-"Plugin 'haishanh/night-owl.vim'
+" GENERALES
 Plugin 'mboughaba/i3config.vim'
 Plugin 'ervandew/supertab'
 Plugin 'junegunn/goyo.vim'
-Plugin 'scrooloose/nerdtree'
+Plugin 'preservim/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'wikitopian/hardmode'
-"Plugin 'plasticboy/vim-markdown'
-"Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
-"Plugin 'tpope/vim-fugitive'
-"Plugin 'xuhdev/vim-latex-live-preview'
+Plugin 'tpope/vim-fugitive'
+Plugin 'ycm-core/YouCompleteMe'
+"Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+"Plugin 'davidhalter/jedi-vim'
+Plugin 'kien/ctrlp.vim'
+
+" COLOR THEME
+"Plugin 'haishanh/night-owl.vim'
 Plugin 'dylanaraps/wal.vim'
 
+" MARKDOWN
+"Plugin 'plasticboy/vim-markdown'
+"Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 
+" LATEX
+"Plugin 'xuhdev/vim-latex-live-preview'
+
+" JAVA
+
+" PYTHON
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'nvie/vim-flake8'
 
 "---------------------------------"
 " Finaliza la entrada de plugins "
@@ -130,8 +152,11 @@ aug i3config_ft_detection
 aug end
 
 " ---> scrooloose/nerdtree && scrooloose/nerdtree
-"autocmd vimenter * NERDTree
-"close vim if the only window left open is a NERDTree
+" Open a NERDTree automatically when vim starts up if no files were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " --> vim-airline/vim-airline
@@ -152,7 +177,6 @@ let g:airline_theme='dark_minimal'
 "syntax enable
 "colorscheme night-owl
 
-
 " -- > dylanaraps/wal.vim
 colorscheme wal
 
@@ -165,9 +189,20 @@ colorscheme wal
 "let g:instant_markdown_autostart = 0
 "let g:instant_markdown_autoscroll = 1
 
-
 "Latex-live-preview
 "let g:livepreview_previewer = 'evince'
 "let g:livepreview_engine = 'pdflatex'
+
+"-------------"
+"  Lenguajes  "
+"-------------"
+
+" PYTHON
+let python_highlight_all=1
+
+" Cargar python-main Template
+function PythonMain()
+   :-1read ~/.vim/templates/python-main
+endfunction
 
 " Dews!

@@ -16,19 +16,6 @@
 # Font for window titles.
 font pango: Anonymous Pro 14
 
-# Iniciar polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-# Recargar el fondo de pantalla con feh
-exec_always --no-startup-id killall feh ; feh --bg-scale $(cat ~/.config/wallpaper) &
-# Recargar colores con pywal
-exec_always --no-startup-id wal -R &
-
-# Bloqueo de pantalla
-#bindsym $mod+p exec $HOME/.config/i3/lock.sh
-# Bloqueo automático
-#exec_always --no-startup-id xautolock -time 10 -locker $HOME/.config/i3/lock.sh
-
 #---------------------------#
 # Configuraciones Generales #
 #---------------------------#
@@ -119,7 +106,6 @@ popup_during_fullscreen smart
 # Focus on window activation
 focus_on_window_activation smart
 
-
 #----------------#
 # Windows Colors #
 #----------------#
@@ -131,9 +117,9 @@ set_from_resource $background_alt i3wm.color2 #f0f0f0
 set_from_resource $foreground i3wm.foreground #f0f0f0
 set_from_resource $indicator i3wm.foreground #f0f0f0
 
-# class                	border 		 background	 text 		indicator 	child_border
-client.focused          $background_alt  $background_alt $foreground    $indicator 	$background_alt
-client.focused_inactive $background      $background     $foreground  	$indicator 	$background
+# class                	border 	    	 background	     text   		indicator   	child_border
+client.focused          $background_alt  $background_alt $foreground    $indicator  	$background_alt
+client.focused_inactive $background      $background     $foreground  	$indicator  	$background
 client.unfocused        $background      $background     $foreground  	$indicator      $background
 client.urgent           $background      $background     $foreground  	$indicator      $background
 client.placeholder      $000000     	 $0c0c0c         $foreground  	$indicator      $background
@@ -146,15 +132,6 @@ client.background       #ffffff
 
 # Todas las ventanas sin titulos
 for_window [class="^.*"] border pixel 5
-
-# Assign programs to specific workspaces
-# Examples
-#assign [class="libreoffice-startcenter"] $wsp2
-#assign [class="libreoffice-writer"]      $wsp2
-#assign [class="Chromium"]                $wsp3
-#assign [class="Thunar"]                  $wsp4
-#assign [class="VirtualBox"]              $wsp7
-assign [class="discord"]                    $wsp9
 
 # Tamaño gaps
 gaps inner 2
@@ -200,19 +177,41 @@ bindsym $mod+space focus mode_toggle
 floating_modifier $mod
 # Floating windows Size
 floating_minimum_size 75 x 50
-floating_maximum_size 1300 x 700
+floating_maximum_size 1850 x 1000
+#floating_maximum_size 1250 x 700
 
 # Float browser pop-ups
 for_window [window_role="pop-up"] floating enable
 
+# Assign programs to specific workspaces
+assign [class="Joplin"]                   $wsp2
+assign [class="VirtualBox Machine"]       $wsp6
+assign [class="VirtualBox Manager"]       $wsp7
+assign [class="calibre"]                  $wsp7
+assign [class="Steam"]                    $wsp8
+assign [class="discord"]                  $wsp9
+
 # Open specific applications in floating mode
-for_window [class="Lxappearance"] floating enable
-for_window [class="Pavucontrol"] floating enable
-for_window [class="Arandr"] floating enable
+for_window [class="Lxappearance"]       floating enable
+for_window [class="Pavucontrol"]        floating enable
+for_window [class="Arandr"]             floating enable
 
 #--------------------#
 # Iniciar Automatico #
 #--------------------#
+
+# Iniciar polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# Recargar el fondo de pantalla con feh
+exec_always --no-startup-id killall feh ; feh --bg-scale $(cat ~/.config/wallpaper) &
+# Recargar colores con pywal
+exec_always --no-startup-id wal -R &
+
+# Bloqueo de pantalla
+#bindsym $mod+p exec $HOME/.config/i3/lock.sh
+# Bloqueo automático
+#exec_always --no-startup-id xautolock -time 10 -locker $HOME/.config/i3/lock.sh
 
 # Para poder usar transparencia en las ventanas intalar compton
 exec_always --no-startup-id killall compton; compton -f &
@@ -222,6 +221,9 @@ exec_always --no-startup-id killall compton; compton -f &
 
 # Dropbox
 exec --no-startup-id killall dropbox ; dropbox &
+
+# Joplin
+exec --no-startup-id killall joplin ; joplin &
 
 #---------#
 # Scripts #
