@@ -223,7 +223,13 @@ exec_always --no-startup-id killall compton; compton -f &
 exec --no-startup-id killall dropbox ; dropbox &
 
 # Joplin
-exec --no-startup-id killall joplin ; joplin &
+exec --no-startup-id killall joplin-desktop ; joplin-desktop &
+
+# Redshif (Reduce brillo pantalla)
+exec --no-startup-id killall redshift-gtk ; redshift-gtk &
+
+# Google Chrome
+exec --no-startup-id killall google-chrome-stable ; google-chrome-stable &
 
 #---------#
 # Scripts #

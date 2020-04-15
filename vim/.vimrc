@@ -77,19 +77,18 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 " Remapeo para plugins.
-nnoremap <leader>i :PluginInstall<CR>:bd<CR>
-nnoremap <leader>t :NERDTreeToggle<CR>
-nnoremap <leader>g :Goyo<CR>
-"nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
+nnoremap <leader>i  :PluginInstall<CR>:bd<CR>
+nnoremap <leader>t  :NERDTreeToggle<CR>
+nnoremap <leader>g  :Goyo<CR>
+nnoremap <F4>       <Esc>:call ToggleHardMode()<CR>
 
 " Remueve espacios en blanco extras
 " al final de cada linea al guardar
 "                     el documento.
 autocmd BufWritePre * %s/\s\+$//e
 
-" Remapeo para hacer ejecutable un script
-nnoremap <F2> :!chmod +x %<CR>
-
+" Mostrar/Ocultar numero de lineas
+nnoremap <F3>       :set nu! rnu!<CR>
 
 "---------------"
 " Vundle Config "
@@ -197,7 +196,17 @@ colorscheme wal
 "  Lenguajes  "
 "-------------"
 
+" JR
+aug javaJR_ft_detection
+  au!
+  au BufNewFile,BufRead *.jr set filetype=java
+aug end
+
+
 " PYTHON
+" Remapeo para hacer ejecutable un script
+nnoremap <F2> :!clear && python %<CR>
+
 let python_highlight_all=1
 
 " Cargar python-main Template
