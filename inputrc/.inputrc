@@ -1,0 +1,5 @@
+#Case insensitive para autocompletado en bash
+set completion-ignore-case on
+
+#Quitar el beep de error
+set bell-style none

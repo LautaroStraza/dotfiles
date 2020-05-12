@@ -12,7 +12,7 @@
 ################################
 
 # Lista de programas
-programas = ['Todos', 'Vim', 'Urxvt', 'Xinit', 'Bash', 'I3', 'Polybar', 'Rofi']
+programas = ['Todos', 'Vim', 'Urxvt', 'Xinit', 'Bash', 'I3', 'Polybar', 'Rofi', 'Inputrc']
 
 from subprocess import run
 
