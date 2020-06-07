@@ -44,8 +44,10 @@ set encoding=utf-8
 
 " Cambio leader key de \ a <espacio>.
 let mapleader =" "
+
 " Recargar configuracion
 nnoremap <leader>r :source ${HOME}/.vimrc<CR>
+
 " Pone/Quita el resaltado en las busquedas
 nnoremap <leader>h :set hlsearch!<CR>
 
@@ -75,6 +77,15 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+" Cierre automático de llaves
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O}}
 
 " Remapeo para plugins.
 nnoremap <leader>i  :PluginInstall<CR>:bd<CR>
@@ -113,14 +124,21 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'wikitopian/hardmode'
 Plugin 'tpope/vim-fugitive'
-Plugin 'ycm-core/YouCompleteMe'
+"Plugin 'ycm-core/YouCompleteMe'
 "Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 "Plugin 'davidhalter/jedi-vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'Yggdroot/indentLine'
+"Plugin 'tpope/vim-commentary'
+Plugin 'preservim/nerdcommenter'
 
 " COLOR THEME
 "Plugin 'haishanh/night-owl.vim'
 Plugin 'dylanaraps/wal.vim'
+
+" WEB
+Plugin 'mattn/emmet-vim'
+Plugin 'turbio/bracey.vim' "PARA LIVE SERVER
 
 " MARKDOWN
 "Plugin 'plasticboy/vim-markdown'
@@ -130,10 +148,14 @@ Plugin 'dylanaraps/wal.vim'
 "Plugin 'xuhdev/vim-latex-live-preview'
 
 " JAVA
+Plugin 'artur-shaik/vim-javacomplete2'
 
 " PYTHON
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
+
+" JAVASCRIPT
+Plugin 'pangloss/vim-javascript'
 
 "---------------------------------"
 " Finaliza la entrada de plugins "
@@ -169,7 +191,7 @@ let g:airline_theme='dark_minimal'
 "Habilitar predeterminado
 "autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 
-" -- > haishanh/night-owl.vim
+" --> haishanh/night-owl.vim
 "if (has("termguicolors"))
  "set termguicolors
 "endif
@@ -178,6 +200,10 @@ let g:airline_theme='dark_minimal'
 
 " -- > dylanaraps/wal.vim
 colorscheme wal
+
+" --> mattn/emmet-vim
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
 
 "plasticboy/vim-markdown
 "let g:vim_markdown_folding_disabled = 1
@@ -192,9 +218,21 @@ colorscheme wal
 "let g:livepreview_previewer = 'evince'
 "let g:livepreview_engine = 'pdflatex'
 
+" -- > artur-shaik/vim-javacomplete2
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+
 "-------------"
 "  Lenguajes  "
 "-------------"
+
+" JAVA
+"To add all missing imports with F6:
+nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+"To remove all unused imports with F7:
+nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
 
 " JR
 aug javaJR_ft_detection

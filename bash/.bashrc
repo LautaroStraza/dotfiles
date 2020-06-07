@@ -7,6 +7,9 @@
 
 alias ls='ls --color=auto'
 
+# Para arreglar los colores de Tmux
+export TERM=screen-256color
+
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
