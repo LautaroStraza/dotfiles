@@ -8,6 +8,15 @@ Archivos de configuraciones para los distintos programas que uso.
 - Python3
 - Stow
 
+Habilitar los repositorios multilib
+$ sudo nano /etc/pacman.conf
+Descomentar las lineas
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+
+Y por último hay que actualizar
+$ sudo pacman -Syyu
+
 ## Configuraciones disponibles
 - Vim
 
