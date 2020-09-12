@@ -11,25 +11,53 @@
 #                              #
 ################################
 
-# Lista de programas
-programas = ['Todos', 'Vim', 'Urxvt', 'Tmux', 'Xinit', 'Bash', 'I3', 'Polybar', 'Rofi', 'Inputrc']
-
 from subprocess import run
+import os
 
-def instalar(programa=None):
-    if(programa != None):
-        if(isinstance(programa, list)):
-            for p in programa:
-                run(['stow', p.lower()])
-        else:
-            run(['stow', programa.lower()])
-        return True
-    else:
-        return False
+# Lista de programas
+paquetes = [
+    'Graficos',
+    'Escritorio-I3',
+    'Vim-Tmux',
+    'Utilidades',
+]
+programas = [
+    'Vim',
+    'Urxvt',
+    'Tmux',
+    'Xinit',
+    'Bash',
+    'I3',
+    'Polybar',
+    'Rofi',
+    'Inputrc',
+]
+dic_programas = {
+    'Graficos': ['xorg', 'xf86-video-intel', 'mesa', 'lib32-mesa'],
+    'Escritorio-I3': ['i3'],
+    'Vim-Tmux': ['vim', 'tmux'],
+    'Utilidades': ['wget', 'git'],
+}
+configuraciones_disponibles = os.listdir()
+configuraciones_disponibles.remove('.git')
+configuraciones_disponibles.remove('install.py')
+configuraciones_disponibles.remove('README.md')
+#print(configuraciones_disponibles)
+#input()
+
+def instalar_configuracion(programas=None):
+    if programas != None:
+        for p in programas:
+            if p in configuraciones_disponibles:
+                print(f'Instalando configuracion de {p}')
+                input('Continuar...')
+                run(['stow', p])
 
 def main():
     op = 0
-    while (op != len(programas)):
+    op_salida = len(paquetes) + len(programas)
+
+    while op != op_salida:
         # Limpio la pantalla
         run('clear')
 
@@ -38,9 +66,18 @@ def main():
         print("- Seleccionar configuraciones -")
 
         # Menu
-        for i, programa in enumerate(programas):
-            print(str(i)+'- '+ programa)
-        print(str(len(programas))+'- Salir')
+        print()
+        print('# PAQUETES #')
+        for i, paquete in enumerate(paquetes):
+            print(f'{i}- {paquete}')
+
+        print()
+        print('# PROGRAMAS #')
+        for i, programa in enumerate(programas, len(paquetes)):
+            print(f'{i}- {programa}')
+
+        print()
+        print(f'{op_salida}- Salir')
 
         #Leo el ingreso
         try:
@@ -50,30 +87,35 @@ def main():
             continue
 
         # Condición de salida
-        if(op == len(programas)):
+        if op == op_salida:
             break
 
-	#Se instalarán todas las configuraciones
-        if(op == 0):
-            for p in programas[1:]:
-                print('Se instalarán las configuraciones de ' + p)
-
-            exito = instalar(programas[1:])
-
-            print('Se han instalado todas las configuraciones: ' + str(exito))
-            input('Continuar...')
-        else:
-            try:
-                seleccion = programas[op]
-            except IndexError as e:
-                print(e)
-                continue
-            else:
-                print('Se instalarán las configuraciones de ' + seleccion)
-                exito = instalar(seleccion)
-                print('Configuración de ' + seleccion + ' instalada con exito: ' + str(exito))
-                input('Continuar...')
-
+    #Se instalarán todas las configuraciones
+        if op >= 0 and op < len(paquetes):
+            para_instalar = []
+            print('Se instalarán los siguientes programas:')
+            for p in dic_programas[paquetes[op]]:
+                print(p)
+                para_instalar.append(p)
+            #print(' '.join(para_instalar))
+            run(['sudo', 'pacman', '-S', '--noconfirm'] + para_instalar)
+            instalar_configuracion(para_instalar)
+#           exito = instalar(programas[1:])
+#
+#            print('Se han instalado todas las configuraciones: ' + str(exito))
+#            input('Continuar...')
+#        else:
+#            try:
+#                seleccion = programas[op]
+#            except IndexError as e:
+#                print(e)
+#                continue
+#            else:
+#                print('Se instalarán las configuraciones de ' + seleccion)
+#                exito = instalar(seleccion)
+#                print('Configuración de ' + seleccion + ' instalada con exito: ' + str(exito))
+#                input('Continuar...')
+#
 # Llamada main
 if __name__ == '__main__':
     main()
