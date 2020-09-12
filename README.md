@@ -17,6 +17,12 @@ Include = /etc/pacman.d/mirrorlist
 Y por último hay que actualizar
 $ sudo pacman -Syyu
 
+Instalar yay
+$ sudo pacman -S base-devel
+$ git clone https://aur.archlinux.org/yay.git
+$ cd yay
+$ makepkg -si
+
 ## Configuraciones disponibles
 - Vim
 
