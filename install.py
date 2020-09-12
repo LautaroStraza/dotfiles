@@ -32,8 +32,10 @@ programas = [
     'Rofi',
     'Inputrc',
 ]
+programas_de_aur = [
+]
 dic_programas = {
-    'Graficos': ['xorg', 'xf86-video-intel', 'mesa', 'lib32-mesa'],
+    'Graficos': ['xorg', 'xf86-video-intel', 'mesa', 'lib32-mesa', 'xf86-input-libinput', 'xorg-drivers', 'vulkan-intel'],
     'Escritorio-I3': ['i3'],
     'Vim-Tmux': ['vim', 'tmux'],
     'Utilidades': ['wget', 'git'],
