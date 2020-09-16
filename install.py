@@ -17,6 +17,7 @@ import os
 # Lista de programas
 paquetes = [
     'Graficos',
+    'Gnome',
     'Escritorio-I3',
     'Vim-Tmux',
     'Utilidades',
@@ -36,6 +37,7 @@ programas_de_aur = [
 ]
 dic_programas = {
     'Graficos': ['xorg', 'xf86-video-intel', 'mesa', 'lib32-mesa', 'xf86-input-libinput', 'xorg-drivers', 'vulkan-intel'],
+    'Gnome': ['gnome', 'gnome-extra', 'gdm'],
     'Escritorio-I3': ['i3'],
     'Vim-Tmux': ['vim', 'tmux'],
     'Utilidades': ['wget', 'git'],
@@ -44,8 +46,11 @@ configuraciones_disponibles = os.listdir()
 configuraciones_disponibles.remove('.git')
 configuraciones_disponibles.remove('install.py')
 configuraciones_disponibles.remove('README.md')
-#print(configuraciones_disponibles)
-#input()
+configuraciones_disponibles.remove('mirrorlist')
+
+servicios = {
+    'gdm': ['enable', 'gdm.service'],
+}
 
 def instalar_configuracion(programas=None):
     if programas != None:
@@ -54,6 +59,11 @@ def instalar_configuracion(programas=None):
                 print(f'Instalando configuracion de {p}')
                 input('Continuar...')
                 run(['stow', p])
+        
+            if p in servicios:
+                # Habilito el servicio
+                run(['sudo', 'systemctl'] + servicios[p])
+
 
 def main():
     op = 0
