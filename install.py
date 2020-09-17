@@ -36,14 +36,15 @@ programas = [
 dic_programas = {
     'Graficos': ['xorg', 'xf86-video-intel', 'mesa', 'lib32-mesa', 'xf86-input-libinput', 'xorg-drivers', 'vulkan-intel'],
     'Escritorio-Gnome': ['gnome', 'gnome-extra', 'gdm'],
-    'Escritorio-I3': ['i3', 'dmenu', 'rofi', 'polybar', 'rxvt-unicode', 'ttf-anonymous-pro', 'ranger', 'python-pywal'],
+    'Escritorio-I3': ['i3', 'dmenu', 'rofi', 'polybar', 'rxvt-unicode', 'urxvt-perls', 'ttf-anonymous-pro', 'ranger', 'python-pywal', 'ttf-inconsolata', 'ttf-dejavu', 'noto-fonts', 'otf-inconsolata-lgc', 'nerd-fonts-inconsolata'],
     'Vim-Tmux': ['vim', 'tmux'],
-    'Utilidades': ['wget', 'git', 'arandr', 'compton', 'network-manager-applet', 'dropbox', 'joplin'],
+    'Utilidades': ['wget', 'git', 'arandr', 'compton', 'network-manager-applet', 'joplin'],
 }
 programas_de_aur = [
         'polybar',
-        'dropbox',
-        'joplin',
+        'joplin', 
+        'otf-inconsolata-lgc', 
+        'nerd-fonts-inconsolata', 
 ]
 configuraciones_disponibles = os.listdir()
 print()
