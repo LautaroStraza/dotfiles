@@ -15,39 +15,40 @@ from subprocess import run
 import os
 
 # Lista de programas
-paquetes = [
+programas = [
     'Graficos',
-    'Gnome',
+    'Escritorio-Gnome',
     'Escritorio-I3',
     'Vim-Tmux',
     'Utilidades',
 ]
-programas = [
-    'Vim',
-    'Urxvt',
-    'Tmux',
-    'Xinit',
-    'Bash',
-    'I3',
-    'Polybar',
-    'Rofi',
-    'Inputrc',
-]
-programas_de_aur = [
-]
+#programas = [
+#    'Vim',
+#    'Urxvt',
+#    'Tmux',
+#    'Xinit',
+#    'Bash',
+#    'I3',
+#    'Polybar',
+#    'Rofi',
+#    'Inputrc',
+#]
 dic_programas = {
     'Graficos': ['xorg', 'xf86-video-intel', 'mesa', 'lib32-mesa', 'xf86-input-libinput', 'xorg-drivers', 'vulkan-intel'],
-    'Gnome': ['gnome', 'gnome-extra', 'gdm'],
-    'Escritorio-I3': ['i3'],
+    'Escritorio-Gnome': ['gnome', 'gnome-extra', 'gdm'],
+    'Escritorio-I3': ['i3', 'dmenu', 'rofi', 'polybar', 'rxvt-unicode', 'ttf-anonymous-pro', 'ranger', 'python-pywal'],
     'Vim-Tmux': ['vim', 'tmux'],
-    'Utilidades': ['wget', 'git'],
+    'Utilidades': ['wget', 'git', 'arandr', 'compton', 'network-manager-applet', 'dropbox', 'joplin'],
 }
+programas_de_aur = [
+        'polybar',
+        'dropbox',
+        'joplin',
+]
 configuraciones_disponibles = os.listdir()
-configuraciones_disponibles.remove('.git')
-configuraciones_disponibles.remove('install.py')
-configuraciones_disponibles.remove('README.md')
-configuraciones_disponibles.remove('mirrorlist')
-
+print()
+print('Configuraciones disponibles:')
+print(configuraciones_disponibles)
 servicios = {
     'gdm': ['enable', 'gdm.service'],
 }
@@ -56,18 +57,17 @@ def instalar_configuracion(programas=None):
     if programas != None:
         for p in programas:
             if p in configuraciones_disponibles:
-                print(f'Instalando configuracion de {p}')
-                input('Continuar...')
+                #print(f'Instalando configuracion de {p}')
+                #input('Continuar...')
                 run(['stow', p])
         
             if p in servicios:
                 # Habilito el servicio
                 run(['sudo', 'systemctl'] + servicios[p])
 
-
 def main():
     op = 0
-    op_salida = len(paquetes) + len(programas)
+    op_salida = len(programas)
 
     while op != op_salida:
         # Limpio la pantalla
@@ -79,13 +79,8 @@ def main():
 
         # Menu
         print()
-        print('# PAQUETES #')
-        for i, paquete in enumerate(paquetes):
-            print(f'{i}- {paquete}')
-
-        print()
         print('# PROGRAMAS #')
-        for i, programa in enumerate(programas, len(paquetes)):
+        for i, programa in enumerate(programas):
             print(f'{i}- {programa}')
 
         print()
@@ -102,32 +97,25 @@ def main():
         if op == op_salida:
             break
 
-    #Se instalarán todas las configuraciones
-        if op >= 0 and op < len(paquetes):
-            para_instalar = []
-            print('Se instalarán los siguientes programas:')
-            for p in dic_programas[paquetes[op]]:
-                print(p)
-                para_instalar.append(p)
-            #print(' '.join(para_instalar))
-            run(['sudo', 'pacman', '-S', '--noconfirm'] + para_instalar)
-            instalar_configuracion(para_instalar)
-#           exito = instalar(programas[1:])
-#
-#            print('Se han instalado todas las configuraciones: ' + str(exito))
-#            input('Continuar...')
-#        else:
-#            try:
-#                seleccion = programas[op]
-#            except IndexError as e:
-#                print(e)
-#                continue
-#            else:
-#                print('Se instalarán las configuraciones de ' + seleccion)
-#                exito = instalar(seleccion)
-#                print('Configuración de ' + seleccion + ' instalada con exito: ' + str(exito))
-#                input('Continuar...')
-#
+        #Instalar programas seleccioados
+        if op >= 0 and op < len(programas):
+            instalar_pacman = []
+            instalar_aur = []
+            print()
+            print('Se instalarán los siguientes programas')
+            for p in dic_programas[programas[op]]:
+                if p in programas_de_aur:
+                    instalar_aur.append(p)
+                else:
+                    instalar_pacman.append(p)
+            print('Desde PACMAN')
+            print(instalar_pacman)
+            print('Desde AUR')
+            print(instalar_aur)
+            run(['sudo', 'pacman', '-S', '--noconfirm'] + instalar_pacman)
+            run(['yay', '-S', '--noconfirm'] + instalar_aur)
+            instalar_configuracion(instalar_pacman + instalar_aur)
+
 # Llamada main
 if __name__ == '__main__':
     main()
