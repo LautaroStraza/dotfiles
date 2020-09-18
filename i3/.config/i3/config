@@ -246,6 +246,7 @@ exec_always --no-startup-id ~/scripts/remap &
 
 # Rofi reemplazando a d-menu
 bindsym $mod+d exec rofi -show drun
+#bindsym $mod+d exec dmenu_run
 bindsym $mod+Tab exec rofi -show window
 
 # Iniciar terminal
@@ -255,7 +256,7 @@ bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+Return exec urxvt -e ranger
 
 # Iniciar Chrome
-#bindsym $mod+c exec chromium
+#bindsym $mod+c exec google-chrome-stable
 
 # vim:filetype=i3
 # Dews!
