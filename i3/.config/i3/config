@@ -28,6 +28,9 @@ set $mod Mod1
 # Restart i3 inplace
 bindsym $mod+Shift+r restart
 
+# Exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
 # Kill focused window
 bindsym $mod+q kill
 
@@ -37,9 +40,16 @@ bindsym $mod+b split h
 # Split in vertical orientation
 bindsym $mod+v split v
 
-# Change container layout (tabbed, toggle split)
-bindsym $mod+a layout tabbed
-bindsym $mod+s layout toggle split
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# focus the parent container
+#bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
 
 # Control focus mouse
 focus_follows_mouse no

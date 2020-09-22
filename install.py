@@ -20,6 +20,7 @@ programas = [
     'Escritorio-Gnome',
     'Escritorio-I3',
     'Vim-Tmux',
+    'Bash',
     'Utilidades',
 ]
 #programas = [
@@ -36,8 +37,9 @@ programas = [
 dic_programas = {
     'Graficos': ['xorg', 'xf86-video-intel', 'mesa', 'lib32-mesa', 'xf86-input-libinput', 'xorg-drivers', 'vulkan-intel'],
     'Escritorio-Gnome': ['gnome', 'gnome-extra', 'gdm'],
-    'Escritorio-I3': ['i3', 'dmenu', 'rofi', 'polybar', 'feh', 'rxvt-unicode', 'urxvt-perls', 'ttf-anonymous-pro', 'ranger', 'python-pywal', 'ttf-inconsolata', 'ttf-dejavu', 'noto-fonts', 'otf-inconsolata-lgc', 'nerd-fonts-inconsolata', 'google-chrome', 'otf-font-awesome-5-free', 'ttf-font-awesome', 'otf-font-awesome', 'awesome-terminal-fonts'],
+    'Escritorio-I3': ['i3', 'dmenu', 'rofi', 'polybar', 'feh', 'rxvt-unicode', 'urxvt-perls', 'ttf-anonymous-pro', 'ranger', 'python-pywal', 'ttf-inconsolata', 'ttf-dejavu', 'noto-fonts', 'otf-inconsolata-lgc', 'nerd-fonts-inconsolata', 'google-chrome', 'otf-font-awesome-5-free', 'ttf-font-awesome', 'otf-font-awesome', 'awesome-terminal-fonts', 'thunar'],
     'Vim-Tmux': ['vim', 'tmux'],
+    'Bash': ['bash'],
     'Utilidades': ['wget', 'git', 'arandr', 'compton', 'network-manager-applet', 'joplin'],
 }
 programas_de_aur = [
@@ -51,9 +53,6 @@ programas_de_aur = [
         'otf-font-awesome',
 ]
 configuraciones_disponibles = os.listdir()
-print()
-print('Configuraciones disponibles:')
-print(configuraciones_disponibles)
 servicios = {
     'gdm': ['enable', 'gdm.service'],
 }
