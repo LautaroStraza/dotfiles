@@ -41,7 +41,7 @@ bindsym $mod+b split h
 bindsym $mod+v split v
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -227,16 +227,19 @@ exec_always --no-startup-id wal -R &
 exec_always --no-startup-id killall compton; compton -f &
 
 # Network Manager
-#exec --no-startup-id killall nm-applet ; nm-applet &
+exec --no-startup-id killall nm-applet ; nm-applet &
 
 # Dropbox
 exec --no-startup-id killall dropbox ; dropbox &
 
 # Joplin
-exec --no-startup-id killall joplin-desktop ; joplin-desktop &
+#exec --no-startup-id killall joplin-desktop ; joplin-desktop &
 
 # Redshif (Reduce brillo pantalla)
 exec --no-startup-id killall redshift-gtk ; redshift-gtk &
+
+# Icono mezclador sonido systray
+exec --no-startup-id killall volctl ; volctl &
 
 # Google Chrome
 exec --no-startup-id killall google-chrome-stable ; google-chrome-stable &
@@ -266,7 +269,10 @@ bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+Return exec urxvt -e ranger
 
 # Iniciar Chrome
-#bindsym $mod+c exec google-chrome-stable
+bindsym $mod+c exec google-chrome-stable
+
+# Toggle screenkeys
+bindsym $mod+s exec ~/scripts/screenkey-toggle
 
 # vim:filetype=i3
 # Dews!
