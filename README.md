@@ -45,3 +45,6 @@ Como terminal uso *konsole*.
 
 ## Agradecimientos
 Gracias a **Brandon Invergo** por la [idea](http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html).
+
+## Problemas 
+Si no se instalan las configuraciones de bashrc y bash_profile es porque los archivos ya existen.

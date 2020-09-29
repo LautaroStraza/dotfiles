@@ -229,6 +229,9 @@ exec_always --no-startup-id killall compton; compton -f &
 # Network Manager
 exec --no-startup-id killall nm-applet ; nm-applet &
 
+# Automontado de usbs con Udiskie
+exec --no-startup-id killall udiskie ; udiskie &
+
 # Dropbox
 exec --no-startup-id killall dropbox ; dropbox &
 
@@ -266,13 +269,17 @@ bindsym $mod+Tab exec rofi -show window
 bindsym $mod+Return exec urxvt
 
 # Iniciar Ranger
-bindsym $mod+Shift+Return exec urxvt -e ranger
+bindsym $mod+Shift+Return exec nautilus
 
 # Iniciar Chrome
 bindsym $mod+c exec google-chrome-stable
 
-# Toggle screenkeys
+# Toggle Screenkeys
 bindsym $mod+s exec ~/scripts/screenkey-toggle
 
-# vim:filetype=i3
+# Take Screenshoot
+#bindsym Print exec urxvt -e "flameshot gui"
+bindsym Print exec urxvt -e scrot ~/Imágenes/$(date "+%d%m%y%H%M%S").png
+
+# vim:filetype=i3config
 # Dews!

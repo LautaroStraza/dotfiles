@@ -40,13 +40,13 @@ dic_programas = {
     'Escritorio-I3': ['i3', 'dmenu', 'rofi', 'polybar', 'feh', 'rxvt-unicode', 'urxvt-perls', 'ttf-anonymous-pro', 'ranger', 'python-pywal', 'ttf-inconsolata', 'ttf-dejavu', 'noto-fonts', 'otf-inconsolata-lgc', 'nerd-fonts-inconsolata', 'google-chrome', 'otf-font-awesome-5-free', 'ttf-font-awesome', 'otf-font-awesome', 'awesome-terminal-fonts', 'thunar', 'xautolock', 'volctl'],
     'Vim-Tmux': ['vim', 'tmux'],
     'Bash': ['bash'],
-    'Utilidades': ['wget', 'git', 'arandr', 'compton', 'network-manager-applet', 'joplin', 'lxappearance', 'pavucontrol', 'redshift', 'screenkey', 'noto-fonts-emoji', 'ttf-joypixels'],
+    'Utilidades': ['wget', 'git', 'arandr', 'compton', 'network-manager-applet', 'joplin', 'lxappearance', 'pavucontrol', 'redshift', 'screenkey', 'noto-fonts-emoji', 'ttf-joypixels', 'scrot', 'udisks2', 'udiskie', 'ntfs-3g'],
 }
 programas_de_aur = [
         'polybar',
-        'joplin', 
-        'otf-inconsolata-lgc', 
-        'nerd-fonts-inconsolata',  
+        'joplin',
+        'otf-inconsolata-lgc',
+        'nerd-fonts-inconsolata',
         'google-chrome',
         'otf-font-awesome-5-free',
         'ttf-font-awesome',
@@ -65,7 +65,7 @@ def instalar_configuracion(programas=None):
                 #print(f'Instalando configuracion de {p}')
                 #input('Continuar...')
                 run(['stow', p])
-        
+
             if p in servicios:
                 # Habilito el servicio
                 run(['sudo', 'systemctl'] + servicios[p])

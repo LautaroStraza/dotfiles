@@ -6,6 +6,10 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
+alias ll='ls -lF --color=auto'
+function cd {
+    builtin cd "$@" && ls -lF --color=auto
+}
 
 # Para arreglar los colores de Tmux
 export TERM=screen-256color
@@ -26,6 +30,4 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 # Prompts
-#PS1='[\u@\h \W]\$ '
-#export PS1="\u@\h \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$"
 export PS1="\e[0;32m\u@\h\e[m \e[0;33m\w\e[m \e[0;35m\$(parse_git_branch)\e[00m\n$ "
